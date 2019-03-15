@@ -1,0 +1,68 @@
+package lista03;
+
+import static org.junit.Assert.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class Testes {
+
+	private float expectedfloat;
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	
+	
+	private Cliente c = new Cliente("Ronaldo",1500);
+	
+	@Before
+	public void setUpStreams() {
+		System.setOut(new PrintStream(outContent));
+	}
+	
+	@After
+	
+	public void cleanUpStreams() {
+		System.setOut(null);
+
+		}
+	
+	@Test 
+	
+	public void test_saque () {
+		float take = 1200.5f;
+		expectedfloat= c.getSaldo() -1200.5f;
+		c.saque(take);
+		float result = c.getSaldo();
+		assertEquals(expectedfloat, result, 0.001);
+					
+	}
+
+	@Test
+	
+	public void test_deposito () {
+		float take = 1500;
+		expectedfloat= c.getSaldo()+1500;
+		c.deposito(take);
+		float result = c.getSaldo();
+		assertEquals(expectedfloat, result,0.001);
+					
+	}
+	
+	@Test
+	
+	public void test_showdata () {
+			c.showData();
+			assertEquals(c.getNome()+"\n"+"Numero da conta" + c.getNconta()+"\n"+"Saldo disponpivel: "+ c.getSaldo()+"\n", outContent.toString());
+				
+			
+					
+	}
+	
+	
+	
+	
+
+}
