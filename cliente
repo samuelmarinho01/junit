@@ -1,0 +1,93 @@
+package lista03;
+
+/**
+ * @author Samuel Elias Marinho da Costa NUSP 10770291
+ *
+ */
+
+public class Cliente {
+	
+	private String nome;
+	private float saldo;
+	private static int nclientes=0;
+	private int nconta=1001;
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public float getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(float saldo) {
+		this.saldo = saldo;
+	}
+	public static int getNclientes() {
+		return nclientes;
+	}
+	public static void setNclientes(int nclientes) {
+		Cliente.nclientes = nclientes+1;
+	}
+	public int getNconta() {
+		return nconta;
+	}
+	public void setNconta(int nconta) {
+		this.nconta = nconta+Cliente.nclientes;
+	}
+	
+	public Cliente(String name) {
+		setNome(name);
+				
+	}
+	
+	public Cliente (String name, float cash) {
+		setNome(name);
+		setSaldo(cash);		
+	}
+	
+	public static boolean comparadorFloat(float x1, float x2) {
+		if (x1 <= x2)
+			return true;
+		return false;
+		
+	}
+	
+	public void saque(float take) {
+		if (Cliente.comparadorFloat(take,getSaldo()))
+			this.saldo= this.saldo - take;
+		else
+			System.out.println("Seu saldo é menor que o valor de saque desejado");
+			
+		
+	}
+	
+	public void deposito (float income) {
+		this.saldo=this.saldo + income;
+	}
+	
+	public static boolean comparadorString(String n1, String n2) {
+		if (n1 == n2)
+			return true;
+		return false;
+		
+	}
+	
+	public void showData() {
+		System.out.println(this.getNome()+"\n"+"Numero da conta" + this.getNconta()+"\n"+"Saldo disponpivel: "+ this.getSaldo());
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}
