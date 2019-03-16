@@ -1,0 +1,121 @@
+import java.util.Random;
+
+public class ClienteEx3{
+	
+	public static int bloqueados;
+	public static int contas;
+	//Atributos
+	private int conta;
+	private String nome;
+	private int saldo;
+	private int bloqueado;
+	
+	
+	//Getters e Setters
+	private void setBloqueado() {
+		if(this.bloqueado==1) {
+			this.bloqueado = 0;
+		}
+		else
+			this.bloqueado = 1;
+			ClienteEx2.bloqueados++;
+	}
+	public static int getBloqueados() {
+		return bloqueados;
+	}
+	public int getBloqueado() {
+		return bloqueado;
+	}
+	public int getConta() {
+		return this.conta;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public int getSaldo() {
+		return saldo;
+	}
+
+	private void setConta(){
+		Random gen = new Random(42);
+		this.conta = 1001 + gen.nextInt(1000);
+	}
+	
+	//Construtores/destrutores
+	private ClienteEx3(String nome){
+		this.nome = nome;
+		bloqueado = 0;
+		setConta();
+	}
+	
+	private ClienteEx3(String nome, int saldo){
+		this.nome = nome;
+		this.saldo = saldo;
+		bloqueado = 0;
+		setConta();
+	}
+	
+	public static ClienteEx3 construct(String nome, int saldo) {
+		if(ClienteEx3.contas < 5) {
+			ClienteEx3.contas++;
+			return new ClienteEx3(nome,saldo);
+		}
+		return null;
+	}
+	
+	public static ClienteEx3 construct(String nome) {
+		if(ClienteEx3.contas < 5) {
+			ClienteEx3.contas++;
+			return new ClienteEx3(nome);
+		}
+		return null;
+	}
+	
+	public void fimCliente(){
+		finalize();
+	}
+	
+	public void finalize() {
+		ClienteEx3.contas--;
+	}
+	
+	
+	//MÃ©todos funcionais
+	public int saque(int valor){
+		if(this.bloqueado==0){
+			saldo -= valor;
+			if(this.saldo<0)
+				this.setBloqueado();
+			return 1;
+		}
+		else
+			return 0;
+	}
+	
+	public void impressao(){
+		System.out.println("Nome: "+this.nome+"\nSaldo:"
+		+this.saldo+"\nNumConta: "+this.conta);
+	}
+	public void deposito(int valor){
+		this.saldo += valor;
+		if(this.saldo>0 && this.bloqueado==1)
+			this.setBloqueado();
+	}
+	public boolean verificaNome(String nome){
+		return this.nome == nome;
+	}
+	public boolean saldoMaior(int saldo){
+		return this.saldo >= saldo;
+	}
+	
+	
+	
+	
+	
+}
