@@ -75,19 +75,8 @@ public class Cliente {
 	}
 	
 	public void showData() {
-		System.out.println(this.getNome()+"\n"+"Numero da conta" + this.getNconta()+"\n"+"Saldo disponpivel: "+ this.getSaldo());
+		System.out.print(this.getNome()+"\n"+"Numero da conta" + this.getNconta()+"\n"+"Saldo disponivel: "+ this.getSaldo());
 	
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-}
