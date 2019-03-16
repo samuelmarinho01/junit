@@ -43,9 +43,9 @@ public class Testes {
 	@Test
 	
 	public void test_deposito () {
-		float take = 1500;
+		float in = 1500;
 		expectedfloat= c.getSaldo()+1500;
-		c.deposito(take);
+		c.deposito(in);
 		float result = c.getSaldo();
 		assertEquals(expectedfloat, result,0.001);
 					
@@ -55,7 +55,7 @@ public class Testes {
 	
 	public void test_showdata () {
 			c.showData();
-			assertEquals(c.getNome()+"\n"+"Numero da conta" + c.getNconta()+"\n"+"Saldo disponpivel: "+ c.getSaldo()+"\n", outContent.toString());
+			assertEquals(c.getNome()+"\n"+"Numero da conta" + c.getNconta()+"\n"+"Saldo disponivel: "+ c.getSaldo(), outContent.toString());
 				
 			
 					
